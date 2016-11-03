@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		xmlns:local="clr-namespace:LineIndicator"
+		x:Class="LineIndicator.LineIndicatorPage">
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<local:DoubleToGridLengthConverter x:Key="cnvGridLength" />
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	<StackLayout>
+		
+		<Grid x:Name="lineGridView" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" ColumnSpacing="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="{Binding Passed, Converter={StaticResource cnvGridLength}}" />
+				<ColumnDefinition Width="{Binding Failed, Converter={StaticResource cnvGridLength}}" />
+				<ColumnDefinition Width="{Binding NotTested, Converter={StaticResource cnvGridLength}}" />
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="3" />
+			</Grid.RowDefinitions>
+			
+			<BoxView HeightRequest="3" BackgroundColor="Green" Grid.Column="0" HorizontalOptions="Fill" />
+			<BoxView HeightRequest="3" BackgroundColor="Red"  Grid.Column="1"  HorizontalOptions="Fill" />
+			<BoxView HeightRequest="3" BackgroundColor="Gray"  Grid.Column="2" HorizontalOptions="Fill" />
+		</Grid>
+
+		<StackLayout VerticalOptions="CenterAndExpand">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<Label Text="Passed"  HorizontalOptions="EndAndExpand" />
+				<Label Text="Failed" Grid.Row="1"  HorizontalOptions="EndAndExpand" />
+
+				<Entry Text="{Binding Passed, Mode=OneWayToSource}" WidthRequest="100" Keyboard="Numeric" Grid.Column="1" HorizontalOptions="StartAndExpand" />
+				<Entry Text="{Binding Failed, Mode=OneWayToSource}" WidthRequest="100" Keyboard="Numeric" Grid.Column="1" Grid.Row="1" HorizontalOptions="StartAndExpand" />
+
+				<Label Text="Not Tested" Grid.Row="2"  HorizontalOptions="EndAndExpand" />
+				<Label Text="{Binding NotTested}" Grid.Row="2" Grid.Column="1"  HorizontalOptions="StartAndExpand" />
+				
+			</Grid>
+		</StackLayout>
+		
+	</StackLayout>
+</ContentPage>
